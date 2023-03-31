@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import userService from '../../services/user.js'
 import errorMessage from '../../utils/errorMessage.js'
+import { notify } from '../../redux/reducers/notificationSlice.js'
 
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
@@ -11,6 +13,7 @@ import LoadingButton from '@mui/lab/LoadingButton'
 const Login = (props) => {
   const [ name, setName ] = useState('')
   const [ password, setPassword ] = useState('')
+  const dispatch = useDispatch()
 
   const handleLogin = async (ev) => {
     ev.preventDefault()
@@ -18,12 +21,12 @@ const Login = (props) => {
     try {
       const response = await userService.login(loginInfo)
       const { data: { message, token }} = response
+      dispatch(notify({ message, _status: 'success' }))
       // save token in redux and storage
       // redirect
     } catch (err) {
       const message = errorMessage(err)
-      console.log(message);
-      // dispatch notifiction here
+      dispatch(notify({ message, _status: 'error' }))
       return
     }
   }
