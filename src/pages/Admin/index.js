@@ -1,10 +1,9 @@
 const Admin = (props) => {
-
-  return (
-    <>
-      admin 
-    </>
-  );
+    return (
+      <>
+        admin 
+      </>
+    );
 };
 
 export default Admin
