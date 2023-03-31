@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 import userService from '../../services/user.js'
 import errorMessage from '../../utils/errorMessage.js'
 import { notify } from '../../redux/reducers/notificationSlice.js'
@@ -13,13 +13,16 @@ import TextField from '@mui/material/TextField'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 const Login = (props) => {
-  const navigate = useNavigate()
   const [ name, setName ] = useState('')
   const [ password, setPassword ] = useState('')
+  const [ loading, setLoading ] = useState(false)
+
   const dispatch = useDispatch()
+  const { user } = useSelector(state => state.user)
 
   const handleLogin = async (ev) => {
     ev.preventDefault()
+    setLoading(true)
     const loginInfo = { name, password }
     try {
       const response = await userService.login(loginInfo)
@@ -27,13 +30,19 @@ const Login = (props) => {
       dispatch(notify({ message, _status: 'success' }))
       dispatch(login({ token }))
       window.localStorage.setItem('user', token)
-      navigate('/')
     } catch (err) {
       const message = errorMessage(err)
       dispatch(notify({ message, _status: 'error' }))
       setPassword('')
       return
+    }finally {
+      setLoading(false)
     }
+  }
+  if(user) {
+    return (
+      <Navigate to='/' replace={true} />
+    )
   }
   return (
     <Stack 
@@ -78,7 +87,7 @@ const Login = (props) => {
           type='submit'
           variant='contained'
           fullWidth
-          loading={false}
+          loading={loading}
           loadingIndicator='Processing...'
           sx={{ marginTop: '10px'}}
         >login</LoadingButton>
