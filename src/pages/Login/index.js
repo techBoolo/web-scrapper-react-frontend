@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import userService from '../../services/user.js'
 import errorMessage from '../../utils/errorMessage.js'
 import { notify } from '../../redux/reducers/notificationSlice.js'
+import { login } from '../../redux/reducers/userSlice.js'
 
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
@@ -11,6 +13,7 @@ import TextField from '@mui/material/TextField'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 const Login = (props) => {
+  const navigate = useNavigate()
   const [ name, setName ] = useState('')
   const [ password, setPassword ] = useState('')
   const dispatch = useDispatch()
@@ -22,11 +25,13 @@ const Login = (props) => {
       const response = await userService.login(loginInfo)
       const { data: { message, token }} = response
       dispatch(notify({ message, _status: 'success' }))
-      // save token in redux and storage
-      // redirect
+      dispatch(login({ token }))
+      window.localStorage.setItem('user', token)
+      navigate('/')
     } catch (err) {
       const message = errorMessage(err)
       dispatch(notify({ message, _status: 'error' }))
+      setPassword('')
       return
     }
   }
@@ -56,6 +61,7 @@ const Login = (props) => {
           fullWidth
           value={name}
           onChange={(ev) => setName(ev.target.value)}
+          autoFocus
         />
         <TextField 
           required
