@@ -12,8 +12,7 @@ const Notification = (props) => {
       justifyContent: 'center',
       alignItems: 'center',
       padding: '10px',
-      color: `${ data._status == 'error' ? 'red' : data._status == 'success' ? 'green' : 'blue' }`,
-      border: '1px solid #ccc',
+      backgroundColor: `${ data._status == 'error' ? '#faaeb2' : data._status == 'success' ? '#98ff98' : '#8ab1f4' }`,
       margin: '0 auto',
       width: '100%',
     }}>

@@ -20,6 +20,7 @@ const Login = (props) => {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
 
+  // fetch the data here and dispatch the data 
   const handleLogin = async (ev) => {
     ev.preventDefault()
     setLoading(true)
@@ -39,6 +40,7 @@ const Login = (props) => {
       setLoading(false)
     }
   }
+
   if(user) {
     return (
       <Navigate to='/' replace={true} />
@@ -48,8 +50,7 @@ const Login = (props) => {
     <Stack 
       alignItems='center'  
       spacing={1} 
-      minWidth='400px'
-      sx={{ margin: 'auto auto', backgoundColor: '#ccc' }}
+      sx={{ margin: '20px auto', backgoundColor: '#ccc' }}
     >
      <Typography variant='h5'>signin</Typography> 
       <form 
