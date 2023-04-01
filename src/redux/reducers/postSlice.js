@@ -11,9 +11,19 @@ const postSlice = createSlice({
   reducers: {
     posts: (state, action) => {
       state.posts = action.payload
+    },
+    updateScrappedDate: (state, action) => {
+      const today = new Date().toDateString()
+      state.posts = state.posts.map( post => {
+        if(post.source === action.paylod) {
+          return {...post, dateScrapped: today } 
+        } else {
+          return post
+        }
+      }) 
     }
   }
 })
 
-export const { posts } = postSlice.actions
+export const { posts, updateScrappedDate } = postSlice.actions
 export default postSlice.reducer
