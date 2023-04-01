@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loginFromStorage } from './redux/reducers/userSlice.js'
+import { posts } from './redux/reducers/postSlice.js'
 import postService from './services/post.js'
 import CssBaseline from '@mui/material/CssBaseline'
 import Container from '@mui/material/Container'
@@ -16,7 +17,6 @@ const App = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // loginFromStorage
     const user = window.localStorage.getItem('user')
     if(user){
       dispatch(loginFromStorage({ token: user }))
@@ -26,8 +26,7 @@ const App = (props) => {
   useEffect(() => {
     async function fetchPost() {
       const response = await postService.getPosts()
-      // dispatch the data to redux
-      console.log(response.data);
+      dispatch(posts(response.data))
     }
 
     fetchPost()
