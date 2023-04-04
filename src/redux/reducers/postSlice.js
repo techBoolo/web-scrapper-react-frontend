@@ -13,10 +13,10 @@ const postSlice = createSlice({
       state.posts = action.payload
     },
     updateScrappedDate: (state, action) => {
-      const today = new Date().toDateString()
-      state.posts = state.posts.map( post => {
-        if(post.source === action.paylod) {
-          return {...post, dateScrapped: today } 
+      const newPost = action.payload
+      state.posts = state.posts.map(post => {
+        if(post.source == newPost.source) {
+          return newPost
         } else {
           return post
         }

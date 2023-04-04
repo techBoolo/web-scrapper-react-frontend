@@ -16,8 +16,8 @@ const Post = ({ post }) => {
   const handleScrap = async (source) => {
     setLoading(true)
     try {
-      await scrapService.scrapSingle(source)
-      dispatch(updateScrappedDate(source))
+      const response = await scrapService.scrapSingle(source)
+      dispatch(updateScrappedDate(response))
     } catch (error) {
       const message = errorMessage(error)
       dispatch(notify({ message, _status: 'error' }))

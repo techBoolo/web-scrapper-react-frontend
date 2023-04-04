@@ -17,6 +17,7 @@ export const loginFromStorage = createAsyncThunk(
     } catch (error) {
       const message = errorMessage(error)
       thunkAPI.dispatch(notify({ message, _status: 'error' }))
+      window.localStorage.removeItem('user')
       return thunkAPI.rejectWithValue(message)
     }
   }
