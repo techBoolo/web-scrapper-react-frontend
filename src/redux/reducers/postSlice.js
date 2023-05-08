@@ -12,7 +12,7 @@ const postSlice = createSlice({
     posts: (state, action) => {
       state.posts = action.payload
     },
-    updateScrappedDate: (state, action) => {
+    updateScrappedData: (state, action) => {
       const newPost = action.payload
       state.posts = state.posts.map(post => {
         if(post.source == newPost.source) {
@@ -25,5 +25,5 @@ const postSlice = createSlice({
   }
 })
 
-export const { posts, updateScrappedDate } = postSlice.actions
+export const { posts, updateScrappedData } = postSlice.actions
 export default postSlice.reducer

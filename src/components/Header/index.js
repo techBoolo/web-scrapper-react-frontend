@@ -7,11 +7,13 @@ const Header = (props) => {
 
   return (
     <Box sx={{ 
-      padding: '20px', 
+      padding: '15px 25px', 
         display: 'flex', 
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: '10px'
+        marginBottom: '10px',
+        backgroundColor: '#f5f5f5',
+        borderBottom: '1px solid #ccc'
       }}
     >
       <Logo /> 

@@ -37,8 +37,8 @@ const App = (props) => {
       <CssBaseline />
       <Stack sx={{ height: '100vh'}}>
         <Header />
+        <Notification />
         <Container maxWidth='md' sx={{ border: '1px solid #ccc', flex: 1, overflowY: 'auto' }}>
-          <Notification />
           <Outlet /> 
         </Container>
         <Footer />

@@ -23,7 +23,7 @@ const Admin = (props) => {
       <Stack alignItems='center' spacing={2}>
         <Typography variant='h5' sx={{ m: '10px' }}>Admin</Typography> 
         { 
-          posts.map(post => (<Post key={post} post={post} />))
+          posts.map(post => (<Post key={post.id} post={post} />))
         }
       </Stack>
     );

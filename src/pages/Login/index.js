@@ -53,6 +53,7 @@ const Login = (props) => {
       sx={{ margin: '20px auto', backgoundColor: '#ccc' }}
     >
      <Typography variant='h5'>signin</Typography> 
+     <Typography variant='caption'>You can use the account info shown below the input fields</Typography> 
       <form 
         onSubmit={handleLogin} 
         style={{ 
@@ -72,6 +73,7 @@ const Login = (props) => {
           value={name}
           onChange={(ev) => setName(ev.target.value)}
           autoFocus
+          helperText='Admin'
         />
         <TextField 
           required
@@ -83,6 +85,7 @@ const Login = (props) => {
           fullWidth
           value={password}
           onChange={(ev) => setPassword(ev.target.value)}
+          helperText='admin'
         />
         <LoadingButton
           type='submit'

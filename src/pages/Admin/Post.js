@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { notify } from '../../redux/reducers/notificationSlice.js'
-import { updateScrappedDate } from '../../redux/reducers/postSlice.js'
+import { updateScrappedData } from '../../redux/reducers/postSlice.js'
 import scrapService from '../../services/scrap.js'
 import errorMessage from '../../utils/errorMessage.js'
 import Stack from '@mui/material/Stack'
@@ -17,7 +17,8 @@ const Post = ({ post }) => {
     setLoading(true)
     try {
       const response = await scrapService.scrapSingle(source)
-      dispatch(updateScrappedDate(response))
+      const { data }  = response
+      dispatch(updateScrappedData(data))
     } catch (error) {
       const message = errorMessage(error)
       dispatch(notify({ message, _status: 'error' }))
@@ -28,7 +29,11 @@ const Post = ({ post }) => {
   return (
     <Stack alignItems='center'>
       <Typography>{ post.source }</Typography>
-      <Typography>{ post.dateScrapped }</Typography>
+      <Typography>Scrapped: { 
+        (today.getTime() == new Date(new Date(post.dateScrapped).toDateString()).getTime()) 
+          ? 'Today' 
+          : new Date(post.dateScrapped).toLocaleDateString('am-ET') }
+      </Typography>
       {
         <LoadingButton
           loadingIndicator={'loading...'}

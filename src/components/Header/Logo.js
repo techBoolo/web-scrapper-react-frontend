@@ -12,7 +12,7 @@ const Logo = (props) => {
         underline='hover'
       >
         <Typography sx={{ color: 'red'}} variant='h5'>
-          Lo
+          Scrapper
         </Typography>
       </Link>
     </Box>

@@ -9,7 +9,9 @@ const Footer = (props) => {
         alignItems: 'center',
         padding: '10px',
         gap: '5px',
-        color: '#ccc'
+        color: '#aaa',
+        backgroundColor: '#f5f5f5',
+        borderTop: '1px solid #ccc'
       }}
     >
       <Typography>&copy;</Typography>
